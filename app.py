@@ -145,8 +145,9 @@ if not df_filtrado.empty:
     altura_paises = max(520, 28 * len(media_ds_pais))
     grafico_paises_barras = px.bar(
         media_ds_pais,
-        x='residencia_iso3',
-        y='usd',
+        x='usd',
+        y='residencia_iso3',
+        orientation='h',
         title='Média Salarial Anual de Data Scientist por nacionalidade',
         labels={
             'residencia_iso3': 'País',
@@ -156,13 +157,13 @@ if not df_filtrado.empty:
     )
     grafico_paises_barras.update_layout(
         title_x=0.1,
+        yaxis={'categoryorder': 'total ascending', 'automargin': True},
         bargap=0.15,
         showlegend=False,
         height=altura_paises
     )
-    st.plotly_chart(grafico_paises_barras, use_container_width = True)
+    st.plotly_chart(grafico_paises_barras, use_container_width=True)
 
 # --- Tabela de Dados Detalhados ---
 st.subheader("Dados Detalhados")
 st.dataframe(df_filtrado)
-
