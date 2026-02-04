@@ -69,6 +69,7 @@ st.subheader("Gráficos")
 
 if not df_filtrado.empty:
     top_cargos = df_filtrado.groupby('cargo')['usd'].mean().nlargest(10).sort_values(ascending=True).reset_index()
+    altura_cargos = max(520, 60 * len(top_cargos))
     grafico_cargos = px.bar(
         top_cargos,
         x='usd',
@@ -77,14 +78,17 @@ if not df_filtrado.empty:
         title="Top 10 cargos por salário médio",
         labels={'usd': 'Média salarial anual (USD)', 'cargo': ''},
         color="cargo",
-        height=520
+        text_auto=True,
+        height=altura_cargos
     )
+    grafico_cargos.update_traces(width=0.75)
     grafico_cargos.update_layout(
         title_x=0.1,
-        yaxis={'categoryorder': 'total ascending'},
-        bargap=0.2
+        yaxis={'categoryorder': 'total ascending', 'automargin': True},
+        bargap=0.1,
+        showlegend=False
     )
-    st.plotly_chart(grafico_cargos, use_container_width=True)
+    st.plotly_chart(grafico_cargos, use_container_width = 'stretch')
 else:
     st.warning("Nenhum dado para exibir no gráfico de cargos.")
 
@@ -98,7 +102,7 @@ if not df_filtrado.empty:
         text_auto=True
     )
     grafico_hist.update_layout(title_x=0.1)
-    st.plotly_chart(grafico_hist, use_container_width=True)
+    st.plotly_chart(grafico_hist, use_container_width = 'stretch')
 else:
     st.warning("Nenhum dado para exibir no gráfico de distribuição.")
 
@@ -114,7 +118,7 @@ if not df_filtrado.empty:
     )
     grafico_remoto.update_traces(textinfo='percent+label')
     grafico_remoto.update_layout(title_x=0.1)
-    st.plotly_chart(grafico_remoto, use_container_width=True)
+    st.plotly_chart(grafico_remoto, use_container_width = 'stretch')
 else:
     st.warning("Nenhum dado para exibir no gráfico dos tipos de trabalho.")
 
@@ -130,7 +134,7 @@ if not df_filtrado.empty:
         labels={'usd': 'Salário médio (USD)', 'residencia_iso3': 'País'}
     )
     grafico_paises.update_layout(title_x=0.1)
-    st.plotly_chart(grafico_paises, use_container_width=True)
+    st.plotly_chart(grafico_paises, use_container_width = 'stretch')
 else:
     st.warning("Nenhum dado para exibir no gráfico de países.")
 
@@ -149,9 +153,8 @@ if not df_filtrado.empty:
         color='residencia_iso3'
     )
     grafico_paises_barras.update_layout(title_x=0.1)
-    st.plotly_chart(grafico_paises_barras, use_container_width=True)
+    st.plotly_chart(grafico_paises_barras, use_container_width = 'stretch')
 
 # --- Tabela de Dados Detalhados ---
 st.subheader("Dados Detalhados")
 st.dataframe(df_filtrado)
-
