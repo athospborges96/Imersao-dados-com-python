@@ -88,7 +88,7 @@ if not df_filtrado.empty:
         bargap=0.1,
         showlegend=False
     )
-    st.plotly_chart(grafico_cargos, use_container_width = True)
+    st.plotly_chart(grafico_cargos, use_container_width = 'stretch')
 else:
     st.warning("Nenhum dado para exibir no gráfico de cargos.")
 
@@ -102,7 +102,7 @@ if not df_filtrado.empty:
         text_auto=True
     )
     grafico_hist.update_layout(title_x=0.1)
-    st.plotly_chart(grafico_hist, use_container_width = True)
+    st.plotly_chart(grafico_hist, use_container_width = 'stretch')
 else:
     st.warning("Nenhum dado para exibir no gráfico de distribuição.")
 
@@ -118,7 +118,7 @@ if not df_filtrado.empty:
     )
     grafico_remoto.update_traces(textinfo='percent+label')
     grafico_remoto.update_layout(title_x=0.1)
-    st.plotly_chart(grafico_remoto, use_container_width = True)
+    st.plotly_chart(grafico_remoto, use_container_width = 'stretch')
 else:
     st.warning("Nenhum dado para exibir no gráfico dos tipos de trabalho.")
 
@@ -134,13 +134,15 @@ if not df_filtrado.empty:
         labels={'usd': 'Salário médio (USD)', 'residencia_iso3': 'País'}
     )
     grafico_paises.update_layout(title_x=0.1)
-    st.plotly_chart(grafico_paises, use_container_width = True)
+    st.plotly_chart(grafico_paises, use_container_width = 'stretch')
 else:
     st.warning("Nenhum dado para exibir no gráfico de países.")
 
 if not df_filtrado.empty:
     df_ds = df_filtrado[df_filtrado['cargo'] == 'Data Scientist']
     media_ds_pais = df_ds.groupby('residencia_iso3')['usd'].mean().sort_values(ascending=False).reset_index()
+    media_ds_pais = media_ds_pais.head(20)
+    altura_paises = max(520, 28 * len(media_ds_pais))
     grafico_paises_barras = px.bar(
         media_ds_pais,
         x='residencia_iso3',
@@ -152,10 +154,14 @@ if not df_filtrado.empty:
         },
         color='residencia_iso3'
     )
-    grafico_paises_barras.update_layout(title_x=0.1)
-    st.plotly_chart(grafico_paises_barras, use_container_width = True)
+    grafico_paises_barras.update_layout(
+        title_x=0.1,
+        bargap=0.15,
+        showlegend=False,
+        height=altura_paises
+    )
+    st.plotly_chart(grafico_paises_barras, use_container_width=True)
 
 # --- Tabela de Dados Detalhados ---
 st.subheader("Dados Detalhados")
 st.dataframe(df_filtrado)
-
