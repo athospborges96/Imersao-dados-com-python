@@ -80,7 +80,8 @@ with col_graf1:
             title="Top 10 cargos por salário médio",
             labels={'usd': 'Média salarial anual (USD)', 'cargo': ''},
             color = "cargo",
-            text_auto = True
+            text_auto = True,
+            height = 500
         )
         grafico_cargos.update_layout(title_x=0.1, yaxis={'categoryorder':'total ascending'})
         st.plotly_chart(grafico_cargos, use_container_width=True)
@@ -159,3 +160,4 @@ with col_graf4_b:
 st.subheader("Dados Detalhados")
 
 st.dataframe(df_filtrado)
+
