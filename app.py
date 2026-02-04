@@ -77,7 +77,6 @@ if not df_filtrado.empty:
         title="Top 10 cargos por salário médio",
         labels={'usd': 'Média salarial anual (USD)', 'cargo': ''},
         color="cargo",
-        text_auto=True,
         height=520
     )
     grafico_cargos.update_layout(
@@ -155,3 +154,4 @@ if not df_filtrado.empty:
 # --- Tabela de Dados Detalhados ---
 st.subheader("Dados Detalhados")
 st.dataframe(df_filtrado)
+
