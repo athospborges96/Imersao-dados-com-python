@@ -142,7 +142,7 @@ if not df_filtrado.empty:
     df_ds = df_filtrado[df_filtrado['cargo'] == 'Data Scientist']
     media_ds_pais = df_ds.groupby('residencia_iso3')['usd'].mean().sort_values(ascending=False).reset_index()
     media_ds_pais = media_ds_pais.head(20)
-    altura_paises = max(520, 28 * len(media_ds_pais))
+    altura_paises = max(800, 70 * len(media_ds_pais))
     grafico_paises_barras = px.bar(
         media_ds_pais,
         x='usd',
@@ -155,6 +155,7 @@ if not df_filtrado.empty:
         },
         color='residencia_iso3'
     )
+    grafico_paises_barras.update_traces(width=0.8)
     grafico_paises_barras.update_layout(
         title_x=0.1,
         yaxis={'categoryorder': 'total ascending', 'automargin': True},
