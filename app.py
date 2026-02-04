@@ -83,7 +83,10 @@ with col_graf1:
             text_auto = True,
             height = 500
         )
-        grafico_cargos.update_layout(title_x=0.1, yaxis={'categoryorder':'total ascending'})
+        grafico_cargos.update_layout(title_x=0.1, 
+                                     yaxis={'categoryorder':'total ascending'},
+                                    bargap = 0.2
+        )
         st.plotly_chart(grafico_cargos, use_container_width=True)
     else:
         st.warning("Nenhum dado para exibir no gráfico de cargos.")
@@ -160,4 +163,5 @@ with col_graf4_b:
 st.subheader("Dados Detalhados")
 
 st.dataframe(df_filtrado)
+
 
