@@ -11,7 +11,7 @@ st.set_page_config(
 )
 
 # --- Carregamento dos dados ---
-df = pd.read_csv("C:\Users\athos\Imersão dados com python\aula 4\dados_imersao_final.csv")
+df = pd.read_csv("dados-imersao-final.csv")
 
 #--- Barra Lateral (Filtros) ---
 st.sidebar.header("🔍 Filtros")
@@ -157,4 +157,5 @@ with col_graf4_b:
 
 # --- Tabela de Dados Detalhados ---
 st.subheader("Dados Detalhados")
+
 st.dataframe(df_filtrado)
