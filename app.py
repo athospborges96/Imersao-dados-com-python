@@ -88,7 +88,7 @@ if not df_filtrado.empty:
         bargap=0.1,
         showlegend=False
     )
-    st.plotly_chart(grafico_cargos, use_container_width = 'stretch')
+    st.plotly_chart(grafico_cargos, use_container_width = True)
 else:
     st.warning("Nenhum dado para exibir no gráfico de cargos.")
 
@@ -102,7 +102,7 @@ if not df_filtrado.empty:
         text_auto=True
     )
     grafico_hist.update_layout(title_x=0.1)
-    st.plotly_chart(grafico_hist, use_container_width = 'stretch')
+    st.plotly_chart(grafico_hist, use_container_width = True)
 else:
     st.warning("Nenhum dado para exibir no gráfico de distribuição.")
 
@@ -118,7 +118,7 @@ if not df_filtrado.empty:
     )
     grafico_remoto.update_traces(textinfo='percent+label')
     grafico_remoto.update_layout(title_x=0.1)
-    st.plotly_chart(grafico_remoto, use_container_width = 'stretch')
+    st.plotly_chart(grafico_remoto, use_container_width = True)
 else:
     st.warning("Nenhum dado para exibir no gráfico dos tipos de trabalho.")
 
@@ -134,7 +134,7 @@ if not df_filtrado.empty:
         labels={'usd': 'Salário médio (USD)', 'residencia_iso3': 'País'}
     )
     grafico_paises.update_layout(title_x=0.1)
-    st.plotly_chart(grafico_paises, use_container_width = 'stretch')
+    st.plotly_chart(grafico_paises, use_container_width = True)
 else:
     st.warning("Nenhum dado para exibir no gráfico de países.")
 
@@ -160,8 +160,9 @@ if not df_filtrado.empty:
         showlegend=False,
         height=altura_paises
     )
-    st.plotly_chart(grafico_paises_barras, use_container_width=True)
+    st.plotly_chart(grafico_paises_barras, use_container_width = True)
 
 # --- Tabela de Dados Detalhados ---
 st.subheader("Dados Detalhados")
 st.dataframe(df_filtrado)
+
